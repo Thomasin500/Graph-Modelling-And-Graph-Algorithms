@@ -78,15 +78,6 @@ void fillGraph(int rows, int cols) {
 	}
 }
 
-void displayGraph(int rows, int cols) {
-
-	for (int i = 1; i < rows*cols + 1; i++) {
-
-		cout << adjacencyList[i]->id << adjacencyList[i]->distance << endl;
-	}
-}
-
-
 void createGraph(int matrix[10][10], int rows, int cols) {
 
 	int dist = 0;
