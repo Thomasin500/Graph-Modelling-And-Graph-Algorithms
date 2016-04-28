@@ -72,12 +72,20 @@ void displayPath(vector<int> path) {
 			
 	}
 
+	ofstream outputFile;
+	outputFile.open("output.txt");
+
 	cout << "Solution: " << endl;
 
 	for (int i = 0; i < output.size(); i++) {
 
 		cout << output[i];
+		outputFile << output[i] << " ";
 	}
+
+	outputFile.close();
+
+	cout << "\n\nSolution also written to output.txt";
 }
 
 

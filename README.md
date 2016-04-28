@@ -36,4 +36,4 @@ adjacency list representation of a graph.
 
 The graph is then traversed according to a modified version of Dijkstra's Algorithm until the goal is reached.
 
-The path is the outputted to the console.
+The path is the outputted to the console and also written to a local output.txt file.

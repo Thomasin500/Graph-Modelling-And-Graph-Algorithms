@@ -15,7 +15,7 @@ using namespace std;
 int inputMatrix[10][10]; //currently a 10x10 matrix, example is 7x7. expand more or make dynamic?
 int rows;
 int cols;
-ifstream file("C:\\Users\\Thomas\\OneDrive\\School\\Analysis of Algorithms\\Project 3\\fullInput.txt");
+ifstream file("C:\\Users\\Thomas\\OneDrive\\School\\Analysis of Algorithms\\Project 3\\smallInput.txt");
 
 void displayMatrix() {
 
