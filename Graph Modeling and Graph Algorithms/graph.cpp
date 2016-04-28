@@ -1,33 +1,150 @@
-#include <iostream>
-#include <vector>
-
 #include "graph.h"
-
-using namespace std;
-
-struct Vertex {
-
-	int id;
-	int distance;
-	int neighbors[4]; //up,down,left,right
-};
 
 vector<Vertex*> adjacencyList(100); //up to 100 vertices with a max 10x10 input 
 
-void outputVertex(int vertexId) {
+int findSmallest(vector<Vertex*> array) {
 
-	cout << "id: " << adjacencyList[vertexId]->id << " distance: " << adjacencyList[vertexId]->distance;
-	cout << endl << "neighbors: ";
+	int min = 999;
+	int index = 0;
+	
+	for (int i = 0; i < array.size(); i++) {
+		
+		if (array[i]->label < min) {
 
-	for (int i = 0; i < 4; i++) {
-
-		cout << adjacencyList[vertexId]->neighbors[i] << " " << endl;
+			min = array[i]->label;
+			index = array[i]->id;
+		}
 	}
 
-	cout << endl << endl;
+	return index;
 }
 
-void addEdges(int vertexId, int rows, int cols) {
+int findSmallestIndex(vector<Vertex*> array) {
+
+	int min = 999;
+	int index = 0;
+
+	for (int i = 0; i < array.size(); i++) {
+
+		if (array[i]->label < min) {
+
+			min = array[i]->label;
+			index = i;
+		}
+	}
+
+	return index;
+}
+
+void displayPath(vector<int> path) {
+
+	vector<string> output;
+
+	reverse(path.begin(), path.end());
+
+	Vertex current;
+	Vertex next;
+	
+	for (int i = 1; i < path.size(); i++) {
+		
+		current = *adjacencyList[path[i-1]];
+		next = *adjacencyList[path[i]];
+
+		if (current.neighbors[0] == next.id) {
+
+			output.push_back("N ");
+		}
+
+		if (current.neighbors[1] == next.id) {
+
+			output.push_back("S ");
+		}
+
+		if (current.neighbors[2] == next.id) {
+
+			output.push_back("W ");
+		}
+
+		if (current.neighbors[3] == next.id) {
+
+			output.push_back("E ");
+		}		
+			
+	}
+
+	cout << "Solution: " << endl;
+
+	for (int i = 0; i < output.size(); i++) {
+
+		cout << output[i];
+	}
+}
+
+
+
+//Graph Traversal Algorithm for Jumping Jim Solution
+//use priority queue for choosing vertices
+void dijkstra(int rows, int cols) {
+
+	//create priority queue 
+	vector<Vertex*> pq;
+
+	//path vector, stores ids of vertices
+	vector<int> solution(100);
+
+	//set root node
+	adjacencyList[1]->label = 0;
+
+	//push all nodes to PQ with root node on top
+	for (int i = 1; i < rows*cols + 1; i++) {
+		
+		pq.push_back(adjacencyList[i]);
+	}
+
+	Vertex current = *adjacencyList[1];
+
+	//run algorithm
+	while (current.id != adjacencyList[rows*cols]->id) {
+
+		//find smallest
+		current = *adjacencyList[findSmallest(pq)];
+
+		//remove smallest from pq
+		int smallestIndex = findSmallestIndex(pq);
+		pq.erase(pq.begin() + smallestIndex);
+
+		//check neighbors
+		for (int i = 0; i < 4; i++) {
+
+			//check neighbor exists
+			if (adjacencyList[current.id]->neighbors[i] != -1) {
+
+				//compare labels
+				if (adjacencyList[adjacencyList[current.id]->neighbors[i]]->label > current.label + current.distance) {
+
+					//update label to totalDistance + distance to neighbor
+					adjacencyList[adjacencyList[current.id]->neighbors[i]]->label = current.label + current.distance;
+					//back link to find path
+					solution[adjacencyList[current.id]->neighbors[i]] = current.id;
+				}
+			}
+		}
+	}	
+
+	//build solution path
+	vector<int> path;
+
+	while (solution[current.id]) {	
+
+		path.push_back(current.id);
+		current.id = solution[current.id];
+	}
+	path.push_back(current.id);
+
+	displayPath(path);
+}
+
+void addNeighbors(int vertexId, int rows, int cols) {
 
 	if (adjacencyList[vertexId]->distance != 0) {
 
@@ -70,11 +187,11 @@ void addEdges(int vertexId, int rows, int cols) {
 	}
 }
 
-void fillGraph(int rows, int cols) {
+void addEdges(int rows, int cols) {
 
 	for (int i = 1; i < rows*cols + 1; i++) {
 
-		addEdges(i, rows, cols);
+		addNeighbors(i, rows, cols);
 	}
 }
 

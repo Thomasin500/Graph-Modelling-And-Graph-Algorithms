@@ -1,16 +1,28 @@
+#include <vector>
 #include <iostream>
+#include <queue>
+#include <string>
 
 using namespace std;
 
-void fillGraph(int rows, int cols);
+struct Vertex {
 
-void addEdges(int vertexId, int rows, int cols);
+	int id;
+	int label = 999;
+	int distance;
+	int neighbors[4]; //up,down,left,right
+};
 
-void displayGraph(int rows, int cols);
+void addEdges(int rows, int cols);
+
+void addNeighbors(int vertexId, int rows, int cols);
 
 void createGraph(int matrix[10][10], int rows, int cols);
 
-void outputVertex(int vertexId);
+void dijkstra(int rows, int cols);
 
+void displayPath(vector<int> path);
 
+int findSmallest(vector<Vertex*> array);
 
+int findSmallestIndex(vector<Vertex*> array);

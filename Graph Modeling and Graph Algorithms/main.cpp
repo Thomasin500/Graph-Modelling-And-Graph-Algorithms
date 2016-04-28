@@ -15,9 +15,11 @@ using namespace std;
 int inputMatrix[10][10]; //currently a 10x10 matrix, example is 7x7. expand more or make dynamic?
 int rows;
 int cols;
-ifstream file("C:\\Users\\Thomas\\OneDrive\\School\\Analysis of Algorithms\\Project 3\\smallInput.txt");
+ifstream file("C:\\Users\\Thomas\\OneDrive\\School\\Analysis of Algorithms\\Project 3\\fullInput.txt");
 
 void displayMatrix() {
+
+	cout << "Rows: " << rows << " Columns: " << cols << endl << endl;
 
 	for (int i = 0; i < rows; i++) {
 
@@ -27,6 +29,8 @@ void displayMatrix() {
 		}
 		cout << endl;
 	}
+
+	cout << endl << endl;
 }
 
 void readInput() {
@@ -43,9 +47,7 @@ void readInput() {
 			if (dem) {
 
 				rows = line[0] - '0';
-				cols = line[2] - '0';
-
-				cout << "Rows: " << rows << " Columns: " << cols << endl;
+				cols = line[2] - '0';				
 
 				dem = false;
 			}
@@ -76,12 +78,9 @@ int main() {
 
 	createGraph(inputMatrix, rows, cols);
 
-	fillGraph(rows, cols);
+	addEdges(rows, cols);
 
-	for (int i = 1; i < rows*cols + 1; i++) {
-
-		outputVertex(i);
-	}
+	dijkstra(rows, cols);
 
 	cin.ignore();
 
