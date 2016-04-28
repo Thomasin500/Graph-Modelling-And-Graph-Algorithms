@@ -3,9 +3,13 @@
 This program takes in a text file with a grid of integers such as:
 
 3 3 
+
 2 1 0
+
 0 1 1
+
 1 2 0
+
 
 Where the first 2 on the top row correspond to the number of rows and columns, respectively.
 
