@@ -15,7 +15,7 @@ Where the first 2 on the top row correspond to the number of rows and columns, r
 
 The body of the grid represents a trampoline where, starting from the top left, the gymnast is 
 able to move up, down, left, or right as many spaces as the label of the square he is on without falling off the grid.
-The goal is to reach the bottom left of the grid in as few moves as possible.
+The goal is to reach the bottom right of the grid in as few moves as possible.
 
 The program outputs the solution as a list of moves as directions.
 
