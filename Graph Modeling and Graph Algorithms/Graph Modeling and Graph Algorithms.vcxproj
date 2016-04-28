@@ -22,6 +22,7 @@
     <ProjectGuid>{D5C642DB-B907-4BF4-A8CA-2EE368D9E47F}</ProjectGuid>
     <RootNamespace>GraphModelingandGraphAlgorithms</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
+    <ProjectName>Graph Modelling and Graph Algorithms</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
